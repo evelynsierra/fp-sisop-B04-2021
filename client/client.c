@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <ctype.h>
-
+#include <stdbool.h>
 
 #define SIZE_BUF 100
 
