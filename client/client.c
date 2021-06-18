@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     if(getuid()){ 
         if (sock == -1) //jika gagal
         {
-            printf("tidak dapat membuat socket");
+            printf("tidak dapat membuat socket");  
         }
         puts("socket berhasil dibuat");
 
@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
                 return 1;
             }
             
-	    //untuk mengambil respons dari server ke client
+	    //untuk mengambil respons dari server ke client 
             if (recv(sock, response, 1024, 0) < 0)
             {
                 puts("respon gagal");
