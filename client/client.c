@@ -24,9 +24,9 @@ int main(int argc, char *argv[])
     if(getuid()){ 
         if (sock == -1) //jika gagal
         {
-            printf("Could not create socket");
+            printf("tidak dapat membuat socket");
         }
-        puts("Socket created");
+        puts("socket berhasil dibuat");
 
         server.sin_addr.s_addr = inet_addr("127.0.0.1"); //ip address
         server.sin_family = AF_INET;
@@ -35,11 +35,11 @@ int main(int argc, char *argv[])
         //koneksikan ke remote server
         if (connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0)
         {
-            perror("Connection failed");
+            perror("connection gagal");
             return 1;
         }
 
-        puts("Connected");
+        puts("connected");
 
         strcpy(username, argv[2]);
         strcpy(password, argv[4]);
@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
         send(sock, unpass, sizeof(unpass), 0);
         if (recv(sock, response, 1024, 0) < 0)
         {
-            printf("Login gagal\n");
+            printf("login gagal\n");
             exit(1);
         }
         root = 0;
@@ -59,14 +59,14 @@ int main(int argc, char *argv[])
 
             if (send(sock, request, 1024, 0) < 0) //jika tidak ada command
             {
-                puts("Request failed");
+                puts("request gagal");
                 return 1;
             }
 	     
 	    //untuk mengambil respons dari server ke client
             if (recv(sock, response, 1024, 0) < 0)
             {
-                puts("Response failed");
+                puts("respon gagal");
                 break;
             }
 
@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
     else{
         if (sock == -1) //jika gagal
         {
-            printf("soket gagal dibuat");
+            printf("tidak dapat membuat socket");
         }
         puts("socket berhasil dibuat");
 
@@ -88,10 +88,10 @@ int main(int argc, char *argv[])
         
         if (connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0) //jika koneksi gagal
         {
-            perror("koneksi gagal");
+            perror("connection gagal");
             return 1;
         }
-        puts("terkoneksi");
+        puts("connected");
 
         root = 0;
         commandTrue = 0;   
@@ -103,18 +103,18 @@ int main(int argc, char *argv[])
 
             if (send(sock, request, strlen(request), 0) < 0) //jika tidak ada command
             {
-                puts("Request failed");
+                puts("request gagal");
                 return 1;
             }
             
 	    //untuk mengambil respons dari server ke client
             if (recv(sock, response, 1024, 0) < 0)
             {
-                puts("Response failed");
+                puts("respon gagal");
                 break;
             }
 
-            puts("Server reply :");
+            puts("respon server :");
             puts(response);
             memset(&response, '\0', sizeof(response));
         }
